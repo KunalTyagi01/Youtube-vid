@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import VideoPlayer from './VideoPlayer';
 
 function App() {
+  const [videoId, setVideoId] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setVideoId(event.target.elements.videoId.value);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form onSubmit={handleSubmit}>
+        <input name="videoId" type="text" placeholder="Enter YouTube Video ID" />
+        <button type="submit">Play Video</button>
+      </form>
+      {videoId && <VideoPlayer videoId={videoId} />}
     </div>
   );
 }
